@@ -25,7 +25,7 @@ DIR_SRC="/volume1/Backup/server/daily"
 DIR_DST="/volumeUSB1/usbshare"
 
 # verify usb device is connected
-mount|grep '/volumeUSB1/usbshare'|| echo "No usb device connected!" && exit;
+mount|grep '/volumeUSB1/usbshare' > /dev/null|| exit "No usb device connected!";
 # remove all existing backups
 rm -rf ${DIR_DST}/*.tib
 # get all full backups
