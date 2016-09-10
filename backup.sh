@@ -24,9 +24,12 @@
 DIR_SRC="/volume1/Backup/server/daily"
 DIR_DST="/volumeUSB1/usbshare"
 
+# remove all existing backups
+rm -rf ${DIR_DST}/*.tib
 # get all full backups
 for a in $(ls -t ${DIR_SRC}|grep full|cut -d '_' -f3|head -n1); do 
     for b in $(ls ${DIR_SRC}|grep "_${a}_"); do 
-        echo "--> $b";
-	done;
+        echo "copy $b to ${DIR_DST}";
+		cp ${DIR_SRC}/${b} ${DIR_DST}/;
+    done;
 done;
