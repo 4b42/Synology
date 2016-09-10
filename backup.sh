@@ -1,6 +1,6 @@
 #!/bin/bash
 #-----------------------------------------------------------------------#
-# Copyright 2006-2016 by Kevin Bühl <kevin@buehl.biz>                   #
+# Copyright 2006-2016 by Kevin Buehl <kevin@buehl.biz>                  #
 #-----------------------------------------------------------------------#
 #  __          __    _____________    __          __    ______________  #
 # |  |  2006  |  |  |   _______   \  |  |        |  |  |___________   | #
@@ -9,7 +9,7 @@
 # |______ ____   |  |   _______  |   |______ ____   |  |   ___________| #
 #  by         |  |  |  |       \  \     Server   |  |  |  |             #
 #    Kevin    |  |  |  |_______/  |   Management |  |  |  |___________  #
-#      Bühl   |__|  |_____________/     System   |__|  |______________| #
+#      Buehl  |__|  |_____________/     System   |__|  |______________| #
 #                                                                       #
 # No part of this website or any of its contents may be reproduced,     #
 # copied, modified or adapted, without the prior written consent of     #
@@ -19,12 +19,14 @@
 #-----------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------#
-# 2016-09-10    Kevin Bühl      created
+# 2016-09-10	Kevin Buehl		created
 #-----------------------------------------------------------------------#
 DIR_SRC="/volume1/Backup/server/daily"
 DIR_DST="/volumeUSB1/usbshare"
 
 # get all full backups
-for i in $(ls -t ${DIR_SRC}|grep full|head -n2); do
-    echo "--> $i";
+for a in $(ls -t ${DIR_SRC}|grep full|cut -d '_' -f3|head -n1); do 
+    for b in $(ls ${DIR_SRC}|grep "_${a}_"); do 
+        echo "--> $b";
+	done;
 done;
