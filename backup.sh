@@ -20,9 +20,12 @@
 
 #-----------------------------------------------------------------------#
 # 2016-09-10	Kevin Buehl		created
+# 2016-09-13	Kevin Buehl		add email notify
 #-----------------------------------------------------------------------#
 DIR_SRC="/volume1/Backup/server/daily"
 DIR_DST="/volumeUSB1/usbshare"
+MAIL_FROM="noreply@4b42.com"
+MAIL_TO="backup@4b42.com"
 
 # verify usb device is connected
 mount|grep '/volumeUSB1/usbshare' > /dev/null|| exit "No usb device connected!";
@@ -35,3 +38,12 @@ for a in $(ls -t ${DIR_SRC}|grep full|cut -d '_' -f3|head -n1); do
 		cp ${DIR_SRC}/${b} ${DIR_DST}/;
     done;
 done;
+
+echo "From: ${MAIL_FROM}" >> /tmp/mail
+echo "To: ${MAIL_TO}" >> /tmp/mail
+echo "Subject: Backupjob NAS" >> /tmp/mail
+echo "" >> /tmp/mailtest
+echo "files in ${DIR_DST}:" >> /tmp/mail
+ls -lah ${DIR_DST} >> /tmp/mail
+cat /tmp/mail | /usr/sbin/sendmail -t ${MAIL_TO}
+rm -rf /tmp/mail

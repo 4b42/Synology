@@ -1,0 +1,1 @@
+wget https://raw.githubusercontent.com/4b42/Synology/master/backup.sh -O backup.sh
